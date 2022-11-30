@@ -11,9 +11,7 @@
 <body>
     <h1>my website</h1>
     
-    <div id="banner">
-        
-    </div>
+    <div id="banner"></div>
     
     <footer>
         <p>footer</p>
@@ -22,11 +20,22 @@
 
     <script type="text/babel">
         const Banner = () => {
+            const title = "Welcome to my website"
+            const subtitle = "this is a website for learning react"
+
+            /*
+            const handleClick = () => {
+                console.log('you clicked me')
+                console.log('the site title is:',title)
+            }
+            */
+
             return (
                 //this is a comment
                 <div className="banner">
-                    <p>banner</p>
-                    <div></div>
+                    <h2>{title.toUpperCase()}</h2>
+                    <p>{subtitle}</p>
+                    <button onClick={(e) => console.log(e)}>Click me</button>
                 </div>
             )
         }
