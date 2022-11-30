@@ -11,9 +11,7 @@
 <body>
     <h1>my website</h1>
     
-    <div id="banner">
-        
-    </div>
+    <div id="banner"></div>
     
     <footer>
         <p>footer</p>
@@ -22,11 +20,17 @@
 
     <script type="text/babel">
         const Banner = () => {
+            const title = "Welcome to my website"
+            const subtitle = "this is a website for learning react"
+            const address = "https://www.netninja.dev"
             return (
                 //this is a comment
                 <div className="banner">
-                    <p>banner</p>
-                    <div></div>
+                    <h2>{title.toUpperCase()}</h2>
+                    <p>{subtitle}</p>
+                    <p>Today's date is: {new Date().toDateString()}</p>
+                    <p>Random number: {Math.random() * 100}</p>
+                    <a href={address}>Visit the Net Ninja Site</a>
                 </div>
             )
         }
