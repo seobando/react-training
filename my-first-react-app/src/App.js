@@ -6,7 +6,7 @@ import EventList from './components/EventList';
 
 function App() {
   const [showModal,setShowModal] = useState(false)
-  const [showEventcls, setShowEvents] = useState(true)
+  const [showEvents, setShowEvents] = useState(true)
   const [events, setEvents] = useState([
     {title: "mario's birthday bash",id:1},
     {title: "bowser's live stream",id:2},
