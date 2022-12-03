@@ -3,4 +3,10 @@ import TripList from './components/TripList';
 
 function App() {
   return (
-    <div className="
+    <div className="App">
+      <TripList />
+    </div>
+  );
+}
+
+export default App;
