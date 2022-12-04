@@ -40,9 +40,9 @@ export default function Create() {
             required
           />
         </label>
-
         <label>
           <span>Recipe ingredients</span>
+          <div className="ingredients">
           <input 
             type="text" 
             onChange={(e)=>setNewIngedient(e.target.value)}
@@ -50,6 +50,7 @@ export default function Create() {
             ref={ingredientInput}
           />
           <button onClick={handleAdd} className="btn">add</button>
+          </div>
         </label>
         <p>Current ingredients: {ingredients.map(i=><em key={i}>{i},</em>)}</p>
 
