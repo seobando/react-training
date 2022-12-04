@@ -29,7 +29,7 @@ function App() {
           <Route path="/contact">
             <Contact/>         
           </Route>
-          <Route path="/article/:id">
+          <Route path="/articles/:id">
             <Article/>
           </Route>
           <Route path="*">
