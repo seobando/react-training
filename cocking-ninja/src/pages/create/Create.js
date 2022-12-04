@@ -43,7 +43,7 @@ export default function Create() {
 
         <label>
           <span>Recipe ingredients</span>
-          <inpit 
+          <input 
             type="text" 
             onChange={(e)=>setNewIngedient(e.target.value)}
             value={newIngredient}
