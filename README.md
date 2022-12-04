@@ -6,6 +6,6 @@ This is my progress with the lessons learned from:
 
 - index
 - my-first-react-app
-- magi-memory
+- magic-memory
 - tripago
 - multipage-site
