@@ -14,7 +14,7 @@ export default function Create() {
   const ingredientInput = useRef(null)
   const navigate = useNavigate()
 
-  const { postData, data, error} = useFetch("http://localhost:3000/recipes","POST")
+  const { postData, data } = useFetch("http://localhost:3000/recipes","POST")
 
   const handleSubmit = (e) => {
     e.preventDefault();
