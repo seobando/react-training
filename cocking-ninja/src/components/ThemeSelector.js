@@ -1,5 +1,5 @@
 import { useTheme } from "../hooks/useTheme";
-import modeIcon from ".../assets/mode-icon.svg";
+import modeIcon from "../assets/mode-icon.svg";
 // styles
 import "./ThemeSelector.css";
 
