@@ -1,43 +1,47 @@
 // styles
 import { useState, useRef } from "react";
-import { useNavigate } from 'react-router-dom'
-import { projectFirestore } from '../../firebase/config'
+import { useNavigate } from "react-router-dom";
+import { projectFirestore } from "../../firebase/config";
 
 import "./Create.css";
 
 export default function Create() {
-  const [title, setTitle] = useState('');
-  const [method, setMethod] = useState('');
-  const [cookingTime, setCookingTime] = useState('');
-  const [newIngredient,setNewIngredient] = useState('')
-  const [ingredients,setIngredients] = useState([])
-  const ingredientInput = useRef(null)
+  const [title, setTitle] = useState("");
+  const [method, setMethod] = useState("");
+  const [cookingTime, setCookingTime] = useState("");
+  const [newIngredient, setNewIngredient] = useState("");
+  const [ingredients, setIngredients] = useState([]);
+  const ingredientInput = useRef(null);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const doc = { title, ingredients, method, cookingTime: cookingTime + ' minutes' }
+    const doc = {
+      title,
+      ingredients,
+      method,
+      cookingTime: cookingTime + " minutes",
+    };
 
     try {
-      await projectFirestore.collection('recipes').add(doc)
-      navigate("/")
+      await projectFirestore.collection("recipes").add(doc);
+      navigate("/");
     } catch (err) {
-      console.log(err)
-    }   
+      console.log(err);
+    }
   };
 
   const handleAdd = (e) => {
-    e.preventDefault()
-    const ing = newIngredient.trim()
+    e.preventDefault();
+    const ing = newIngredient.trim();
 
     if (ing && !ingredients.includes(ing)) {
-      setIngredients(prevIngredients => [...prevIngredients, newIngredient])
+      setIngredients((prevIngredients) => [...prevIngredients, newIngredient]);
     }
-    setNewIngredient('')
-    ingredientInput.current.focus()
-  }
-
+    setNewIngredient("");
+    ingredientInput.current.focus();
+  };
 
   return (
     <div className="create">
@@ -55,16 +59,23 @@ export default function Create() {
         <label>
           <span>Recipe ingredients</span>
           <div className="ingredients">
-          <input 
-            type="text" 
-            onChange={(e)=>setNewIngredient(e.target.value)}
-            value={newIngredient}
-            ref={ingredientInput}
-          />
-          <button onClick={handleAdd} className="btn">add</button>
+            <input
+              type="text"
+              onChange={(e) => setNewIngredient(e.target.value)}
+              value={newIngredient}
+              ref={ingredientInput}
+            />
+            <button onClick={handleAdd} className="btn">
+              add
+            </button>
           </div>
         </label>
-        <p>Current ingredients: {ingredients.map(i=><em key={i}>{i},</em>)}</p>
+        <p>
+          Current ingredients:{" "}
+          {ingredients.map((i) => (
+            <em key={i}>{i},</em>
+          ))}
+        </p>
 
         <label>
           <span>Recipe Method:</span>
