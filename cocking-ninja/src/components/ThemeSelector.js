@@ -1,24 +1,40 @@
-import { useTheme } from '../hooks/useTheme'
-
+import { useTheme } from "../hooks/useTheme";
+import modeIcon from ".../assets/mode-icon.svg";
 // styles
-import './ThemeSelector.css'
+import "./ThemeSelector.css";
 
-const themeColors = ['#58249c','#249C6b','#b70233']
+const themeColors = ["#58249c", "#249C6b", "#b70233"];
 
 export default function ThemeSelector() {
-    const { changeColor } = useTheme()
+  const { changeColor, changeMode, mode } = useTheme();
+
+  const toggleMode = () => {
+    changeMode(mode === "dark" ? "light" : "dark");
+  };
 
   return (
-    <div className='theme-selector'>
-        <div className='theme-buttons'>
-            {themeColors.map(color => (
-                <div 
-                    ket={color}
-                    onClick={()=> changeColor(color)}
-                    style={{background:color}}
-                />
-            ))}
-        </div>      
+    <div className="theme-selector">
+      <div className="mode-toggle">
+        <img onClick={toggleMode} src={modeIcon} alt="" />
+      </div>
+      <div className="theme-selector">
+        {themeColors.map((color) => (
+          <div
+            ket={color}
+            onClick={() => changeColor(color)}
+            style={{ background: color }}
+          />
+        ))}
+      </div>
+      <div className="theme-buttons">
+        {themeColors.map((color) => (
+          <div
+            ket={color}
+            onClick={() => changeColor(color)}
+            style={{ background: color }}
+          />
+        ))}
+      </div>
     </div>
-  )
+  );
 }
