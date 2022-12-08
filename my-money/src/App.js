@@ -16,18 +16,17 @@ function App() {
         <BrowserRouter>
           <Navbar />
           <Routes>
-            <Route
-              exact
-              path="/"
-              element={!user ? <Home /> : <Navigate to="/login" />}
+          <Route
+              exact path="/"
+              element={user ? <Home/> : <Login/>}
             />
             <Route
               path="/login"
-              element={!user ? <Login /> : <Navigate to="/" />}
+              element={!user ? <Home/> : <Login/>}
             />
             <Route
               path="/signup"
-              element={!user ? <Signup /> : <Navigate to="/" />}
+              element={!user ? <Home/> : <Signup/>}
             />
           </Routes>
         </BrowserRouter>
