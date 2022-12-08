@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useFirestore } from '../../useFirestore'
+import { useFirestore } from '../../hooks/useFirestore'
 
 export default function TransactionForm({ uid }){
     const [name,setName] = useState('')
@@ -36,7 +36,7 @@ export default function TransactionForm({ uid }){
                         value={name}
                     />
                 </label>
-                <labe>
+                <label>
                     <span>Amount:</span>
                     <input 
                         type="number"
@@ -44,7 +44,7 @@ export default function TransactionForm({ uid }){
                         onChange={(e)=>setAmount(e.target.value)}
                         value={amount}
                     />
-                </labe>
+                </label>
                 <button type="submit">Add Transaction</button>
             </form>
         </>
