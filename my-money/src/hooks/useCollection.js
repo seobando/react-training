@@ -1,32 +1,40 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import { projectFirestore } from "../firebase/config"
 
-export const useCollection = (collection) => {
-    const[documents,setDocuments] = useState(null)
-    const[error,setError] = useState(null)
+export const useCollection = (collection, _query) => {
+  const [documents, setDocuments] = useState(null)
+  const [error, setError] = useState(null)
 
-    useEffect(()=>{
-        let ref = projectFirestore.collection(collection)
+  // if we don't use a ref --> infinite loop in useEffect
+  // _query is an array and is "different" on every function call
+  const query = useRef(_query).current
 
-        const unsubscribe = ref.onSnapshot((snapshot)=>{
-            let results = []
-            snapshot.docs.forEach(doc=>{
-                results.push({...doc.data(), id: doc.id})
-            })
+  useEffect(() => {
+    let ref = projectFirestore.collection(collection)
 
-        // update state
-        setDocuments(results)
-        setError(null)
+    if (query) {
+      ref = ref.where(...query)
+    }
 
-        }, (error) => {
-            console.log(error)
-            setError('could not fetch the data')
-        })
+    const unsubscribe = ref.onSnapshot(snapshot => {
+      let results = []
+      snapshot.docs.forEach(doc => {
+        console.log(doc)
+        results.push({...doc.data(), id: doc.id})
+      });
+      
+      // update state
+      setDocuments(results)
+      setError(null)
+    }, error => {
+      console.log(error)
+      setError('could not fetch the data')
+    })
 
-        // unsubscribe on unmount
-        return () => unsubscribe()
+    // unsubscribe on unmount
+    return () => unsubscribe()
 
-    },[collection])
+  }, [collection, query])
 
-    return { documents, error }
+  return { documents, error }
 }
