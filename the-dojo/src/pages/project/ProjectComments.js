@@ -1,10 +1,12 @@
-import { useState } from "react";
-import { timestamp } from "../../firebase/config";
-import { useAuthContext } from "../../hooks/useAuthContext";
+import { useState } from "react"
+import { timestamp } from "../../firebase/config"
+import { useAuthContext } from "../../hooks/useAuthContext"
+import { useFirestore } from "../../hooks/useFirestore"
 
-export default function ProjectComments() {
-  const { user } = useAuthContext();
-  const [newComment, setNewComment] = useState("");
+export default function ProjectComments({ project }) {
+  const { user } = useAuthContext()
+  const { updateDocument, response } = useFirestore('projects')
+  const [newComment, setNewComment] = useState('')
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -14,10 +16,16 @@ export default function ProjectComments() {
       photoURL: user.photoURL,
       content: newComment,
       createdAt: timestamp.fromDate(new Date()),
-      id: Math.random(),
-    };
-    console.log(commentToAdd);
-  };
+      id: Math.random()
+    }
+    
+    await updateDocument(project.id, {
+      comments: [...project.comments, commentToAdd],
+    })
+    if (!response.error) {
+      setNewComment('')
+    }
+  }
 
   return (
     <div className="project-comments">
@@ -26,8 +34,7 @@ export default function ProjectComments() {
       <form className="add-comment" onSubmit={handleSubmit}>
         <label>
           <span>Add new comment:</span>
-          <textarea
-            required
+          <textarea 
             onChange={(e) => setNewComment(e.target.value)}
             value={newComment}
           ></textarea>
@@ -35,5 +42,5 @@ export default function ProjectComments() {
         <button className="btn">Add Comment</button>
       </form>
     </div>
-  );
+  )
 }
