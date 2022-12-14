@@ -1,9 +1,10 @@
-// styles
 import { Link } from "react-router-dom";
 import { useTheme } from "../hooks/useTheme";
-import "./RecipeList.css";
 import Trashcan from '../assets/trashcan.svg'
 import { projectFirestore } from "../firebase/config";
+
+// styles
+import "./RecipeList.css";
 
 export default function RecipeList({ recipes }) {
 
